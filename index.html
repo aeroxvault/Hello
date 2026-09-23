@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aerox Voult</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#111;
+}
+
+header{
+    background:#111;
+    color:white;
+    padding:8px 3%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo {
+    width: 110px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 110px !important;
+    max-height: 45px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.whatsapp-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#25D366;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:22px;
+}
+
+.cart-btn{
+    background:white;
+    color:#111;
+    border:0;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.categories{
+    display:flex;
+    gap:10px;
+    padding:17px 5%;
+    overflow-x:auto;
+}
+
+.categories button{
+    border:1px solid #ddd;
+    background:white;
+    padding:10px 18px;
+    border-radius:20px;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.categories button:hover{
+    background:#111;
+    color:white;
+}
+
+.search-box{
+    padding:0 5% 25px;
+}
+
+.search-box input{
+    width:100%;
+    padding:14px;
+    border:1px solid #DDDDDD;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+}
+
+.products{
+    padding:0 5% 50px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:20px;
+}
+
+.product{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    transition:.2s;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+}
+
+.product-image{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    cursor:pointer;
+}
+
+.product-info{
+    padding:15px;
+}
+
+.product-info h3{
+    margin:7px 0;
+    cursor:pointer;
+}
+
+.category{
+    color:#777;
+    font-size:13px;
+}
+
+.price{
+    font-size:19px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.add-btn{
+    width:100%;
+    padding:11px;
+    border:0;
+    background:#111;
+    color:white;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0, 0, 0, 0.65);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:500px;
+    max-height:90vh;
+    overflow:auto;
+    border-radius:14px;
+    padding:20px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:15px;
+    top:10px;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.cart-item{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    border-bottom:1px solid #ddd;
+    padding:12px 0;
+}
+
+.cart-item img{
+    width:65px;
+    height:65px;
+    object-fit:cover;
+    border-radius:7px;
+}
+
+.cart-info{
+    flex:1;
+}
+
+.qty{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    margin-top:7px;
+}
+
+.qty button{
+    width:28px;
+    height:28px;
+    border:0;
+    background:#111;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.remove{
+    color:red;
+    cursor:pointer;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.total{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.whatsapp-order{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:0;
+    border-radius:8px;
+    background:#25D366;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+footer{
+    background:#111;
+    color:#C2D6E1;
+    text-align:center;
+    padding:10px;
+}
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:20px;
+    }
+
+    .whatsapp-btn{
+        width:38px;
+        height:38px;
+    }
+
+    .cart-btn{
+        padding:9px 11px;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+        padding-left:4%;
+        padding-right:4%;
+    }
+
+    .product-image{
+        height:170px;
+    }
+
+    .product-info{
+        padding:12px;
+    }
+
+    .product-info h3{
+        font-size:15px;
+    }
+
+    .price{
+        font-size:17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+      <img src="image/logo.png" alt="Logo">
+    </div>
+
+    <div class="header-right">
+
+        <!-- CHANGE THIS WHATSAPP NUMBER -->
+        <a
+            class="whatsapp-btn"
+            href="https://wa.me/8801987998144"
+            target="_blank"
+        >
+            💬
+        </a>
+
+        <button
+            class="cart-btn"
+            onclick="openCart()"
+        >
+            🛒 Cart (<span id="cartCount">0</span>)
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="categories">
+
+    <button onclick="filterProducts('All')">
+        All
+    </button>
+
+    <button onclick="filterProducts('Kits')">
+        Kits
+    </button>
+
+    <button onclick="filterProducts('Vapes')">
+        Vapes
+    </button>
+
+    <button onclick="filterProducts('Lighter')">
+         Lighter 
+    </button>
+
+    <button onclick="filterProducts('Perfumes')">
+        Perfumes
+    </button>
+
+    <button onclick="filterProducts('Knifes')">
+        Knifes
+    </button>
+
+</div>
+
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search products..."
+        onkeyup="searchProducts()"
+    >
+
+</div>
+
+
+<section
+    class="products"
+    id="products"
+></section>
+
+
+<footer>
+    <p>⚜️Aerox Vault Your Trusted Partner.</p>
+    <p>We always provide our best products.💎</p>
+    <p>📍Address: Dhaka, Saver, Zirabo</p>
+    <p>📞 Phone: +8801987998144</p>
+    <p>💬 Whatsapp: +8801987998144</p>
+</footer>
+
+
+<!-- CART -->
+
+<div
+    class="modal"
+    id="cartModal"
+>
+
+    <div class="modal-box">
+
+        <span
+            class="close"
+            onclick="closeCart()"
+        >
+            ×
+        </span>
+
+        <h2>🛒 Your Cart</h2>
+
+        <br>
+
+        <div id="cartItems"></div>
+
+        <div class="total">
+            Total: ৳<span id="cartTotal">0</span>
+        </div>
+
+        <button
+            class="whatsapp-order"
+            onclick="orderOnWhatsApp()"
+        >
+            💬 Order on WhatsApp
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =================================================
+   WHATSAPP NUMBER
+   শুধু এই নম্বরটি পরিবর্তন করবে
+================================================= */
+
+const WHATSAPP_NUMBER = "8801987998144";
+
+
+/* =================================================
+   PRODUCTS
+================================================= */
+
+const products = [
+
+    {
+        id:1,
+        name:"D-BREATH 30K Puffs",
+        category:"Vapes",
+        price:1700,
+        image:"image/d-breath30k1.jpg"
+    },
+
+    {
+        id:2,
+        name:"D-Breath 6k Puffs",
+        category:"Vapes",
+        price:1300,
+        image:"image/d-breath6k1.jpg"
+    },
+
+    {
+        id:3,
+        name:"flyto 800 Puffs",
+        category:"Vapes",
+        price:550,
+        image:"image/flyto8p1.jpg"
+    },
+
+    {
+        id:4,
+        name:"Kiligbar 6k Puffs",
+        category:"Vapes",
+        price:1200,
+        image:"image/kiligbar6k1.jpg"
+    },
+
+    {
+        id:5,
+        name:"kit Kiligbar 6k Puffs",
+        category:"Kits",
+        price:500,
+        image:"image/kitkiligbar6k1.jpg"
+    },
+    
+
+];
+
+
+/* =================================================
+   CART FROM LOCAL STORAGE
+================================================= */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("AeroxCart")
+    ) || [];
+
+
+let currentProducts = [...products];
+
+
+/* =================================================
+   SAVE CART
+================================================= */
+
+function saveCart(){
+
+    localStorage.setItem(
+        "AeroxCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =================================================
+   DISPLAY PRODUCTS
+================================================= */
+
+function displayProducts(list){
+
+    const container =
+        document.getElementById("products");
+
+    container.innerHTML = "";
+
+    if(list.length === 0){
+
+        container.innerHTML =
+            "<p>No products found.</p>";
+
+        return;
+    }
+
+    list.forEach(product => {
+
+        container.innerHTML += `
+
+            <div class="product">
+
+                <img
+                    class="product-image"
+                    src="${product.image}"
+                    onclick="openProduct(${product.id})"
+                    alt="${product.name}"
+                >
+
+                <div class="product-info">
+
+                    <div class="category">
+                        ${product.category}
+                    </div>
+
+                    <h3
+                        onclick="openProduct(${product.id})"
+                    >
+                        ${product.name}
+                    </h3>
+
+                    <div class="price">
+                        ৳${product.price}
+                    </div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart(${product.id})"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =================================================
+   OPEN PRODUCT PAGE
+================================================= */
+
+function openProduct(id){
+
+    window.location.href =
+        "product.html?id=" + id;
+
+}
+
+
+/* =================================================
+   FILTER
+================================================= */
+
+function filterProducts(category){
+
+    if(category === "All"){
+
+        currentProducts =
+            [...products];
+
+    }else{
+
+        currentProducts =
+            products.filter(
+                product =>
+                    product.category === category
+            );
+
+    }
+
+    displayProducts(currentProducts);
+
+}
+
+
+/* =================================================
+   SEARCH
+================================================= */
+
+function searchProducts(){
+
+    const text =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    const result =
+        currentProducts.filter(product =>
+
+            product.name
+            .toLowerCase()
+            .includes(text)
+
+            ||
+
+            product.category
+            .toLowerCase()
+            .includes(text)
+
+        );
+
+    displayProducts(result);
+
+}
+
+
+/* =================================================
+   ADD TO CART
+================================================= */
+
+function addToCart(id){
+
+    const product =
+        products.find(
+            item => item.id === id
+        );
+
+    if(!product) return;
+
+
+    const existing =
+        cart.find(
+            item => item.id === id
+        );
+
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+
+            id:product.id,
+
+            name:product.name,
+
+            price:product.price,
+
+            image:product.image,
+
+            quantity:1
+
+        });
+
+    }
+
+
+    saveCart();
+
+    updateCart();
+
+}
+
+
+/* =================================================
+   UPDATE CART
+================================================= */
+
+function updateCart(){
+
+    const count =
+        cart.reduce(
+            (total,item) =>
+                total + item.quantity,
+            0
+        );
+
+    document.getElementById(
+        "cartCount"
+    ).innerText = count;
+
+
+    renderCart();
+
+}
+
+
+/* =================================================
+   RENDER CART
+================================================= */
+
+function renderCart(){
+
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
+
+    container.innerHTML = "";
+
+    let total = 0;
+
+
+    if(cart.length === 0){
+
+        container.innerHTML =
+            "<p>Your cart is empty</p>";
+
+        document.getElementById(
+            "cartTotal"
+        ).innerText = "";
+
+        return;
+    }
+
+
+    cart.forEach(item => {
+
+        const itemTotal =
+            item.price * item.quantity;
+
+        total += itemTotal;
+
+
+        container.innerHTML += `
+
+            <div class="cart-item">
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                >
+
+                <div class="cart-info">
+
+                    <b>
+                        ${item.name}
+                    </b>
+
+                    <div>
+                        ৳${item.price}
+                    </div>
+
+                    <div class="qty">
+
+                        <button
+                            onclick="changeQty(${item.id},-1)"
+                        >
+                            -
+                        </button>
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button
+                            onclick="changeQty(${item.id},1)"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                    <div class="remove"
+                         onclick="removeItem(${item.id})">
+
+                        Remove
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    document.getElementById(
+        "cartTotal"
+    ).innerText = total;
+
+}
+
+
+/* =================================================
+   QUANTITY
+================================================= */
+
+function changeQty(id,amount){
+
+    const item =
+        cart.find(
+            item => item.id === id
+        );
+
+    if(!item) return;
+
+
+    item.quantity += amount;
+
+
+    if(item.quantity <= 0){
+
+        cart =
+            cart.filter(
+                item => item.id !== id
+            );
+
+    }
+
+
+    saveCart();
+
+    updateCart();
+
+}
+
+
+/* =================================================
+   REMOVE
+================================================= */
+
+function removeItem(id){
+
+    cart =
+        cart.filter(
+            item => item.id !== id
+        );
+
+
+    saveCart();
+
+    updateCart();
+
+}
+
+
+/* =================================================
+   CART MODAL
+================================================= */
+
+function openCart(){
+
+    renderCart();
+
+    document.getElementById(
+        "cartModal"
+    ).style.display = "flex";
+
+}
+
+
+function closeCart(){
+
+    document.getElementById(
+        "cartModal"
+    ).style.display = "none";
+
+}
+
+
+/* =================================================
+   WHATSAPP ORDER
+================================================= */
+
+function orderOnWhatsApp(){
+
+    if(cart.length === 0){
+
+        alert("Your cart is empty!");
+
+        return;
+    }
+
+
+    let message =
+        "Hello, I want to place an order.%0A%0A";
+
+
+    message +=
+        "🛍️ *Order Details*%0A";
+
+
+    message +=
+        "--------------------------%0A";
+
+
+    let total = 0;
+
+
+    cart.forEach((item,index) => {
+
+        const itemTotal =
+            item.price * item.quantity;
+
+        total += itemTotal;
+
+
+        message +=
+            (index + 1) +
+            ". " +
+            item.name +
+            "%0A";
+
+        message +=
+            "Quantity: " +
+            item.quantity +
+            "%0A";
+
+        message +=
+            "Price: ৳" +
+            item.price +
+            " x " +
+            item.quantity +
+            " = ৳" +
+            itemTotal +
+            "%0A%0A";
+
+    });
+
+
+    message +=
+        "💰 *Total: ৳" +
+        total +
+        "*%0A%0A";
+
+
+    message +=
+        "Please confirm my order.";
+
+
+    const url =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        message;
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =================================================
+   INITIAL
+================================================= */
+
+displayProducts(products);
+
+updateCart();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Product Details - Aerox Voult</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#111;
+}
+
+header{
+    background:#111;
+    color:white;
+    padding:8px 3%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo {
+    width: 110px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 110px !important;
+    max-height: 45px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.back{
+    color:white;
+    text-decoration:none;
+    background:#333;
+    padding:9px 15px;
+    border-radius:7px;
+}
+
+.product-page{
+    max-width:1100px;
+    margin:35px auto;
+    padding:0 20px;
+}
+
+.product-container{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:35px;
+}
+
+.main-image{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.thumbnails{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+    overflow-x:auto;
+}
+
+.thumbnails img{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    border-radius:8px;
+    cursor:pointer;
+    border:2px solid transparent;
+}
+
+.thumbnails img:hover{
+    border-color:#111;
+}
+
+.category{
+    color:#777;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.product-title{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.price{
+    font-size:26px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.description{
+    line-height:1.7;
+    color:#555;
+}
+
+.details{
+    margin-top:25px;
+    padding-top:20px;
+    border-top:1px solid #ddd;
+}
+
+.details h3{
+    margin-bottom:10px;
+}
+
+.add-cart{
+    width:100%;
+    padding:14px;
+    margin-top:25px;
+    background:#111;
+    color:white;
+    border:0;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.whatsapp{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    background:#25D366;
+    color:white;
+    border:0;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+@media(max-width:700px){
+
+    .product-container{
+        grid-template-columns:1fr;
+        padding:15px;
+    }
+
+    .main-image{
+        height:350px;
+    }
+
+    .product-title{
+        font-size:25px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        <img src="image/logo.png" alt="Logo">
+    </div>
+
+    <a
+        href="index.html"
+        class="back"
+    >
+        Back
+    </a>
+
+</header>
+
+
+<div class="product-page">
+
+    <div class="product-container">
+
+
+        <!-- PRODUCT IMAGES -->
+
+        <div>
+
+            <img
+                id="mainImage"
+                class="main-image"
+                src=""
+                alt="Product"
+            >
+
+            <div
+                class="thumbnails"
+                id="thumbnails"
+            ></div>
+
+        </div>
+
+
+        <!-- PRODUCT DETAILS -->
+
+        <div>
+
+            <div
+                class="category"
+                id="category"
+            ></div>
+
+            <h1
+                class="product-title"
+                id="productName"
+            ></h1>
+
+            <div
+                class="price"
+                id="price"
+            ></div>
+
+            <p
+                class="description"
+                id="description"
+            ></p>
+
+
+            <div class="details">
+
+                <h3>
+                    Product Details
+                </h3>
+
+                <p
+                    id="details"
+                    class="description"
+                ></p>
+
+            </div>
+
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                🛒 Add to Cart
+            </button>
+
+
+            <button
+                class="whatsapp"
+                onclick="orderThisProduct()"
+            >
+                💬 Order on WhatsApp
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =================================================
+   WHATSAPP NUMBER
+================================================= */
+
+const WHATSAPP_NUMBER =
+    "8801987998144";
+
+
+/* =================================================
+   PRODUCTS
+================================================= */
+
+const products = [
+
+    {
+        id:1,
+
+        name:"D-BREATH 30k Puffs",
+
+        category:"Vapes",
+
+        price:1700,
+
+        images:["image/d-breath30k1.jpg",
+
+            "image/d-breath30k2.jpg",
+
+            "image/d-breath30k3.jpg"
+        ],
+
+        description:
+        "Premium Quality D-Breath 30K Vape smooth and Smooth Performance.",
+
+        details:[
+        "1 liquid flavor full free 💥",
+        "Long battery backup🔋",
+        "30k puffs long use 💨",
+        "3 mood swings feature ✨",
+        "Smart looking and heavy used🌟",
+        "হাতে পণ্য পেয়ে মূল্য পরিশোধের সুবিধা 📦",
+        "সারা বাংলাদেশে হোম ডেলিভারি 🚚",
+      ]
+    },
+
+
+    {
+        id:2,
+
+        name:"D-Breath 6k Puffs",
+
+        category:"Vapes",
+
+        price:1300,
+
+        images:[
+            "image/d-breath6k2.jpg",
+
+            "image/d-breath6k3.jpg",
+
+            "image/d-breath6k4.jpg"
+        ],
+
+        description:
+        "Premium Quality D-Breath 6K Vape smooth and Smart Performance.",
+
+        details: [
+        "1 liquid flavor full free 💥",
+        "Very light weight and carry easily ✅",
+        "Everytime you change flavor kid♻️",
+        "Always on vape and auto charging off future ⚡",
+        "হাতে পণ্য পেয়ে মূল্য পরিশোধের সুবিধা 📦",
+        "সারা বাংলাদেশে হোম ডেলিভারি 🚚",
+        ]
+    },
+
+
+    {
+        id:3,
+
+        name:"Flyto 800 Puffs",
+
+        category:"Vapes",
+
+        price:550,
+
+        images:[
+            "image/flyto8p1.jpg",
+
+            "image/flyto8p2.jpg",
+
+            "image/flyto8p3.jpg"
+        ],
+
+        description:
+        "Comfortable premium Flyto 800 Puffs vapr suitable for casual use.",
+
+        details: [
+        "1 liquid flavor full free 💥",
+        "Mini light weight and powerful vape 💥",
+        "You can carry easily everywhere ❇️",
+        "It's feel looks like cigaret 🚬",
+        "হাতে পণ্য পেয়ে মূল্য পরিশোধের সুবিধা 📦",
+        "সারা বাংলাদেশে হোম ডেলিভারি 🚚",
+        ]
+    },
+
+
+    {
+        id:4,
+
+        name:"Kiligbar 6k Puffs",
+
+        category:"Vapes",
+
+        price:1200,
+
+        images:[
+            "image/kiligbar6k1.jpg",
+
+            "image/kiligbar6k2.jpg",
+
+            "image/kiligbar6k3.jpg"
+        ],
+
+        description:
+        "Stylish and spacious Vape for everyday use.",
+
+        details: [
+        "1 liquid flavor full free 💥",
+        "Very light weight and carry easily ✅",
+        "Everytime you change flavor kid♻️",
+        "Always on vape and auto charging off future ⚡",
+        "হাতে পণ্য পেয়ে মূল্য পরিশোধের সুবিধা 📦",
+        "সারা বাংলাদেশে হোম ডেলিভারি 🚚",
+        ]
+    },
+    
+    
+    {
+        id:5,
+
+        name:"Kiligbar 6k Puffs",
+
+        category:"Kits",
+
+        price:500,
+
+        images:[
+            "image/Kitkiligbar6k1.jpg",
+        ],
+
+        description:
+        "1 pic Kiligbar 6k Puffs premium kis only ৳500.",
+
+        details: [
+        "1 liquid flavor full free 💥",
+        "You choice various 6 item flavor",
+        "হাতে পণ্য পেয়ে মূল্য পরিশোধের সুবিধা 📦",
+        "সারা বাংলাদেশে হোম ডেলিভারি 🚚",
+        ]
+    },
+    
+];
+
+
+/* =================================================
+   GET PRODUCT
+================================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const id =
+    Number(
+        params.get("id")
+    );
+
+const product =
+    products.find(
+        item => item.id === id
+    );
+
+
+/* =================================================
+   SHOW PRODUCT
+================================================= */
+
+if(product){
+
+    document.getElementById(
+        "mainImage"
+    ).src = product.images[0];
+
+
+    document.getElementById(
+        "productName"
+    ).innerText = product.name;
+
+
+    document.getElementById(
+        "category"
+    ).innerText = product.category;
+
+
+    document.getElementById(
+        "price"
+    ).innerText = "৳" + product.price;
+
+
+    document.getElementById(
+        "description"
+    ).innerText = product.description;
+
+
+    document.getElementById(
+        "details"
+    ).innerHTML =
+    product.details.map(
+        detail => "<li>" + detail + "</li>"
+    ).join("");
+
+
+    const thumbnails =
+        document.getElementById(
+            "thumbnails"
+        );
+
+
+    product.images.forEach(image => {
+
+        const img =
+            document.createElement("img");
+
+        img.src = image;
+
+
+        img.onclick = function(){
+
+            document.getElementById(
+                "mainImage"
+            ).src = image;
+
+        };
+
+
+        thumbnails.appendChild(img);
+
+    });
+
+}
+
+
+/* =================================================
+   ADD TO CART
+================================================= */
+
+function addToCart(){
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem(
+                "AeroxCart"
+            )
+        ) || [];
+
+
+    const existing =
+        cart.find(
+            item => item.id === product.id
+        );
+
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+
+            id:product.id,
+
+            name:product.name,
+
+            price:product.price,
+
+            image:product.images[0],
+
+            quantity:1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "AeroxCart",
+        JSON.stringify(cart)
+    );
+
+const msg = document.createElement("div");
+
+msg.innerText = "Add to cart successfully ✅";
+
+msg.style.cssText = `
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    color:#111;
+    padding:25px 30px;
+    border-radius:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    z-index:99999;
+    font-size:19px;
+    white-space: nowrap;
+`;
+
+document.body.appendChild(msg);
+
+setTimeout(() => {
+    msg.remove();
+}, 400);
+
+}
+
+
+/* =================================================
+   ORDER THIS PRODUCT ON WHATSAPP
+================================================= */
+
+function orderThisProduct(){
+
+    const message =
+        "Hello, I want to order:%0A%0A" +
+
+        "🛍️ Product: " +
+        product.name +
+        "%0A" +
+
+        "💰 Price: ৳" +
+        product.price +
+        "%0A%0A" +
+
+        "Please confirm my order.";
+
+
+    const url =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        message;
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
